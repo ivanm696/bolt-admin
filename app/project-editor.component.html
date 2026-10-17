@@ -1,0 +1,29 @@
+<main class="wrap" *ngIf="project; else notFound">
+  <div class="top-row">
+    <a routerLink="/">← Проекты</a>
+    <h1>{{ project.name }}</h1>
+  </div>
+
+  <div class="toolbar">
+    <button (click)="runServer()" [disabled]="busy">▶ Запустить</button>
+    <button class="ghost" (click)="installDeps()" [disabled]="busy">📦 npm install</button>
+    <button class="ghost" (click)="save()" [disabled]="busy">💾 Сохранить</button>
+    <button class="ghost" (click)="terminal = ''">🧹 Очистить</button>
+    <span class="status">{{ status }}</span>
+  </div>
+
+  <div class="tabs">
+    <button *ngFor="let f of fileNames" [class.active]="f === activeFile" (click)="activeFile = f">{{ f }}</button>
+  </div>
+  <textarea class="editor" [(ngModel)]="content" name="content" spellcheck="false"></textarea>
+
+  <pre class="terminal">{{ terminal || 'Терминал: нажмите «Запустить»' }}</pre>
+
+  <iframe *ngIf="preview" [src]="preview" title="preview" class="preview"></iframe>
+</main>
+
+<ng-template #notFound>
+  <main class="wrap">
+    <p>Проект не найден. <a routerLink="/">Вернуться к списку</a></p>
+  </main>
+</ng-template>

@@ -15,10 +15,20 @@
             "outputPath": "dist",
             "index": "index.html",
             "main": "main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.json",
-            "assets": [],
-            "styles": ["styles.css"],
+            "assets": [
+              {
+                "glob": "coi-serviceworker.js",
+                "input": "public",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -37,8 +47,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": { "buildTarget": "bolt-admin:build:production" },
-            "development": { "buildTarget": "bolt-admin:build:development" }
+            "production": {
+              "buildTarget": "bolt-admin:build:production"
+            },
+            "development": {
+              "buildTarget": "bolt-admin:build:development"
+            }
           },
           "defaultConfiguration": "development"
         }

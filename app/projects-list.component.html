@@ -1,0 +1,15 @@
+<main class="wrap">
+  <h1>Проекты</h1>
+  <form class="row" (ngSubmit)="create()">
+    <input [(ngModel)]="newName" name="newName" placeholder="Название проекта" />
+    <button type="submit" [disabled]="!newName.trim()">+ Создать</button>
+  </form>
+  <ul class="list">
+    <li *ngFor="let p of projects">
+      <a [routerLink]="['/projects', p.id]">{{ p.name }}</a>
+      <span class="muted">{{ p.updatedAt | date: 'short' }}</span>
+      <button class="ghost" (click)="remove(p.id)">Удалить</button>
+    </li>
+  </ul>
+  <p *ngIf="!projects.length" class="muted">Проектов пока нет.</p>
+</main>
